@@ -1,33 +1,60 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-let scale = 1;
+let yesScale = 1;
+let noScale = 1;
 
-if(noBtn){
+const frases = [
+    "¿Segura? 😢",
+    "Piénsalo bien 😭",
+    "No seas así 🥺",
+    "Última oportunidad 😔",
+    "Ya casi dices que sí 😏"
+];
 
-    // Para celular (click)
-    noBtn.addEventListener("click", function(e){
-        e.preventDefault();
-        crecerBoton();
-    });
+let index = 0;
 
-    // Para computadora (cuando pasa el mouse)
-    noBtn.addEventListener("mouseover", function(){
-        moverBoton();
-    });
+noBtn.addEventListener("click", function(e){
+    e.preventDefault();
 
+    // Vibración en celular
+    if (navigator.vibrate) {
+        navigator.vibrate(200);
+    }
+
+    // SI crece
+    yesScale += 0.4;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    // NO se hace pequeño
+    noScale -= 0.1;
+    if(noScale > 0.3){
+        noBtn.style.transform = `scale(${noScale})`;
+    }
+
+    // Cambiar texto del botón NO
+    if(index < frases.length - 1){
+        noBtn.textContent = frases[index];
+        index++;
+    }
+
+    // Corazones
+    crearCorazon();
+});
+
+// Crear corazones animados
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "absolute";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = Math.random() * window.innerHeight + "px";
+    heart.style.fontSize = "30px";
+    heart.style.animation = "fade 1s ease-out";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 1000);
 }
 
-function crecerBoton(){
-    scale += 0.3;
-    yesBtn.style.transform = `scale(${scale})`;
-}
-
-function moverBoton(){
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-}
