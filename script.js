@@ -3,6 +3,7 @@ const yesBtn = document.getElementById("yesBtn");
 
 let yesScale = 1;
 let noScale = 1;
+let clicks = 0;
 
 const frases = [
     "¿Segura? 😢",
@@ -12,49 +13,45 @@ const frases = [
     "Ya casi dices que sí 😏"
 ];
 
-let index = 0;
-
 noBtn.addEventListener("click", function(e){
     e.preventDefault();
 
-    // Vibración en celular
+    clicks++;
+
+    // Vibrar en celular
     if (navigator.vibrate) {
         navigator.vibrate(200);
     }
 
     // SI crece
-    yesScale += 0.4;
+    yesScale += 0.5;
     yesBtn.style.transform = `scale(${yesScale})`;
 
     // NO se hace pequeño
     noScale -= 0.1;
-    if(noScale > 0.3){
+    if(noScale > 0.2){
         noBtn.style.transform = `scale(${noScale})`;
     }
 
-    // Cambiar texto del botón NO
-    if(index < frases.length - 1){
-        noBtn.textContent = frases[index];
-        index++;
+    // Cambiar texto
+    if(clicks <= frases.length){
+        noBtn.textContent = frases[clicks - 1];
     }
 
-    // Corazones
-    crearCorazon();
+    // Si ya tocaron varias veces → SI ocupa toda la pantalla
+    if(clicks >= 5){
+        yesBtn.style.position = "fixed";
+        yesBtn.style.top = "0";
+        yesBtn.style.left = "0";
+        yesBtn.style.width = "100vw";
+        yesBtn.style.height = "100vh";
+        yesBtn.style.display = "flex";
+        yesBtn.style.justifyContent = "center";
+        yesBtn.style.alignItems = "center";
+        yesBtn.style.fontSize = "50px";
+        yesBtn.style.borderRadius = "0";
+        yesBtn.style.zIndex = "9999";
+    }
 });
 
-// Crear corazones animados
-function crearCorazon(){
-    const heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.style.position = "absolute";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    heart.style.fontSize = "30px";
-    heart.style.animation = "fade 1s ease-out";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 1000);
-}
 
