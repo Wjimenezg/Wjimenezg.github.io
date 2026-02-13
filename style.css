@@ -1,44 +1,70 @@
-body{
+/* Reset básico */
+*{
     margin:0;
     padding:0;
+    box-sizing:border-box;
+}
+
+/* Fondo general */
+body{
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow:hidden;
 }
 
+/* Contenedor principal */
 .container{
     text-align:center;
     background:white;
     padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
     max-width:400px;
+    width:90%;
+    position:relative;
 }
 
+/* Título */
 h1{
     color:#ff4d6d;
+    margin-bottom:20px;
 }
 
+/* Texto */
 p{
     font-size:18px;
     margin-bottom:30px;
+    color:#333;
 }
 
+/* Contenedor botones */
+.btn{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* Estilo general botones */
 .btn a{
     text-decoration:none;
-    padding:12px 25px;
-    margin:10px;
-    border-radius:30px;
+    padding:15px 35px;
+    border-radius:40px;
     font-weight:bold;
     color:white;
-    transition:0.3s;
+    font-size:18px;
+    transition:0.3s ease;
+    display:inline-block;
 }
 
+/* Botón SI */
 .yes{
     background:#28a745;
+    transition:0.3s ease;
 }
 
 .yes:hover{
@@ -46,10 +72,42 @@ p{
     transform:scale(1.1);
 }
 
+/* Botón NO */
 .no{
     background:#dc3545;
+    transition:0.3s ease;
 }
 
 .no:hover{
     background:#c82333;
 }
+
+/* Animación corazones */
+@keyframes fade{
+    from{
+        opacity:1;
+        transform:scale(1);
+    }
+    to{
+        opacity:0;
+        transform:scale(2);
+    }
+}
+
+/* Responsive extra para celular */
+@media (max-width:480px){
+    .container{
+        padding:30px;
+    }
+
+    .btn a{
+        padding:12px 25px;
+        font-size:16px;
+    }
+
+    h1{
+        font-size:22px;
+    }
+}
+
+
