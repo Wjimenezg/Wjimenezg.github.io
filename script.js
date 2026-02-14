@@ -6,10 +6,10 @@ let noScale = 1;
 let clicks = 0;
 
 const frases = [
-    "¿Segura? 😢",
-    "Piénsalo bien 😭",
-    "No seas así 🥺",
-    "Última oportunidad 😔",
+    "¿Segura? 🥺",
+    "Piénsalo bien 🤔",
+    "'¿Segurisima? 🥺",
+    "Enserio? 😋",
     "Ya casi dices que sí 😏"
 ];
 
@@ -53,5 +53,6 @@ noBtn.addEventListener("click", function(e){
         yesBtn.style.zIndex = "9999";
     }
 });
+
 
 
